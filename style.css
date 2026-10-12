@@ -1,22 +1,5 @@
 
-/* ===============================
-   MODERN CLASSIC SCHOOL DASHBOARD
-   =============================== */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
-
-:root {
-    --navy: #14283f;
-    --navy-light: #213e58;
-    --gold: #d5ad69;
-    --gold-light: #f4e8d0;
-    --ivory: #f8f6f1;
-    --white: #ffffff;
-    --text: #26394a;
-    --muted: #7b8793;
-    --border: #e6e8e8;
-}
-
+/* PENGATURAN DASAR */
 * {
     margin: 0;
     padding: 0;
@@ -24,94 +7,50 @@
 }
 
 body {
-    font-family: 'DM Sans', Arial, sans-serif;
-    background:
-        radial-gradient(
-            circle at top right,
-            #d9e4e3,
-            transparent 45%
-        ),
-        linear-gradient(135deg, #edf1f2, #f8f6f1);
-
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #14213d, #243b55);
     min-height: 100vh;
-    padding: 45px 20px;
-    color: var(--text);
+    padding: 30px 15px;
+    color: #333;
 }
 
-/* CONTAINER */
-
+/* CONTAINER UTAMA */
 .container {
-    max-width: 1050px;
+    max-width: 950px;
     margin: auto;
-    background: var(--white);
-    border-radius: 18px;
-    overflow: hidden;
-    padding: 0 35px 35px;
-
-    box-shadow:
-        0 20px 60px rgba(20, 40, 63, 0.12);
-
-    animation: fadeIn 0.6s ease;
+    background: #fffdf7;
+    padding: 35px;
+    border-radius: 15px;
+    border-top: 7px solid #c9a227;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
 }
 
-/* HEADER UTAMA */
-
+/* JUDUL */
 h1 {
-    background: linear-gradient(
-        120deg,
-        #14283f,
-        #284e65
-    );
-
-    color: white;
     text-align: center;
-    font-family: 'Playfair Display', Georgia, serif;
-
-    font-size: 32px;
-    letter-spacing: 1px;
-
-    padding: 45px 15px 15px;
-    margin: 0 -35px;
-
-    border-top: 5px solid var(--gold);
+    color: #14213d;
+    font-size: 30px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
 }
 
 .subtitle {
-    background: var(--navy);
-    color: var(--gold-light);
     text-align: center;
-
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-
-    padding: 0 15px 35px;
-    margin: 0 -35px 30px;
+    color: #9b7924;
+    font-size: 16px;
+    margin-bottom: 25px;
 }
 
-/* TANGGAL */
-
-.container > p:not(.subtitle) {
-    display: table;
-    margin: 0 0 25px auto;
-
-    background: var(--gold-light);
-    color: #76582f;
-
-    padding: 10px 18px;
-    border-radius: 30px;
-
-    font-size: 13px;
-    font-weight: 700;
+.container > p {
+    margin-bottom: 15px;
 }
 
-/* TABEL */
-
+/* TABEL ABSENSI */
 .table-wrapper {
-    border-radius: 12px;
+    width: 100%;
     overflow-x: auto;
-    border: 1px solid var(--border);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    margin-top: 20px;
+    border-radius: 8px;
 }
 
 table {
@@ -121,367 +60,187 @@ table {
 }
 
 th {
-    background: var(--navy);
-    color: white;
-
-    padding: 18px 15px;
+    background: #14213d;
+    color: #f5d77a;
+    padding: 16px;
+    font-size: 15px;
     text-align: center;
-
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 700;
-}
-
-th:first-child {
-    width: 75px;
-}
-
-th:last-child {
-    width: 220px;
 }
 
 td {
-    padding: 15px;
+    padding: 14px;
     text-align: center;
-
-    font-size: 14px;
-    border-bottom: 1px solid #edf0f2;
-
-    transition: background 0.2s;
-}
-
-td:nth-child(2) {
-    font-weight: 600;
-    color: var(--navy);
+    border-bottom: 1px solid #e5e5e5;
 }
 
 tr:nth-child(even) {
-    background: #f8fafb;
+    background: #f5f1e8;
 }
 
 tr:hover td {
-    background: #f2f6f5;
+    background: #fff1c7;
 }
 
-tr:last-child td {
-    border-bottom: none;
-}
-
-/* DROPDOWN ABSENSI */
-
+/* PILIHAN STATUS */
 select {
-    width: 155px;
+    width: 150px;
     max-width: 100%;
-    padding: 11px 14px;
-
-    background: #f8fafb;
-    color: var(--navy);
-
-    border: 1px solid #dce3e7;
-    border-radius: 8px;
-
-    font-family: 'DM Sans', Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-
+    padding: 10px;
+    border: 1px solid #c9a227;
+    border-radius: 6px;
+    background: #fffdf7;
+    color: #14213d;
+    font-family: Georgia, serif;
     cursor: pointer;
-    outline: none;
-
-    transition: 0.25s;
-}
-
-select:hover {
-    border-color: var(--gold);
-    background: white;
 }
 
 select:focus {
-    border-color: var(--gold);
-    background: white;
-    box-shadow: 0 0 0 4px rgba(213,173,105,0.17);
+    outline: 2px solid #c9a227;
 }
 
 /* TOMBOL SIMPAN */
-
 button {
     display: block;
-    margin: 30px 0 35px auto;
-
-    padding: 15px 35px;
-    min-width: 200px;
-
+    margin: 30px auto;
+    padding: 14px 35px;
+    background: #c9a227;
+    color: #14213d;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: bold;
     border: none;
-    border-radius: 9px;
-
-    background: linear-gradient(
-        120deg,
-        #14283f,
-        #284e65
-    );
-
-    color: white;
-
-    font-family: 'DM Sans', Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
-
-    box-shadow: 0 6px 15px rgba(20,40,63,0.18);
 }
 
 button:hover {
-    background: linear-gradient(
-        120deg,
-        #b58a49,
-        #d5ad69
-    );
-
-    color: var(--navy);
-    transform: translateY(-3px);
-
-    box-shadow: 0 9px 20px rgba(181,138,73,0.25);
+    background: #14213d;
+    color: #f5d77a;
+    transform: translateY(-2px);
 }
 
-button:active {
-    transform: scale(0.98);
+/* PESAN BERHASIL */
+.success {
+    background: #e4f4e7;
+    color: #216e39;
+    border-left: 5px solid #28a745;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px 0;
+    text-align: center;
 }
 
-/* REKAP ABSENSI */
-
+/* JUDUL REKAP */
 h2 {
-    font-family: 'Playfair Display', Georgia, serif;
-    color: var(--navy);
-    font-size: 25px;
-
-    margin-bottom: 22px;
-    padding-bottom: 13px;
-
-    border-bottom: 1px solid var(--border);
+    color: #14213d;
+    font-size: 23px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #c9a227;
+    padding-bottom: 10px;
 }
 
-h2::before {
-    content: "";
-    display: inline-block;
-
-    width: 5px;
-    height: 22px;
-
-    background: var(--gold);
-    border-radius: 5px;
-
-    margin-right: 12px;
-    vertical-align: middle;
-}
-
-/* KARTU STATISTIK */
-
+/* KOTAK REKAP */
 .rekap {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 17px;
+    gap: 15px;
 }
 
 .rekap div {
-    position: relative;
-    overflow: hidden;
-
-    padding: 25px 20px;
-    border-radius: 12px;
-
+    padding: 22px 10px;
+    text-align: center;
+    border-radius: 10px;
     transition: 0.3s;
 }
 
 .rekap div:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
 }
 
 .rekap h3 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 7px;
+    font-size: 32px;
+    margin-bottom: 8px;
 }
 
 .rekap p {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-/* DEKORASI KARTU */
-
-.rekap div::after {
-    content: "";
-    position: absolute;
-
-    width: 80px;
-    height: 80px;
-
-    border: 13px solid currentColor;
-    border-radius: 50%;
-
-    opacity: 0.07;
-
-    top: -35px;
-    right: -30px;
-}
-
-/* HADIR */
-
+/* WARNA STATUS */
 .hadir {
-    background: #e6f4ed;
-    color: #21745c;
-    border-left: 4px solid #21745c;
+    background: #d9f2df;
+    color: #206b36;
 }
-
-/* IZIN */
 
 .izin {
-    background: #e6f0fa;
-    color: #3975a8;
-    border-left: 4px solid #3975a8;
+    background: #dceafa;
+    color: #20558c;
 }
-
-/* SAKIT */
 
 .sakit {
-    background: #fff2db;
-    color: #ae7b29;
-    border-left: 4px solid #d5ad69;
+    background: #fff0c2;
+    color: #8c6500;
 }
-
-/* ALFA */
 
 .alfa {
-    background: #fae9e9;
-    color: #a34c50;
-    border-left: 4px solid #a34c50;
-}
-
-/* NOTIFIKASI */
-
-.success {
-    margin-bottom: 25px;
-    padding: 15px 20px;
-
-    background: #e6f4ed;
-    color: #21745c;
-
-    border: 1px solid #c4e5d3;
-    border-left: 5px solid #21745c;
-    border-radius: 8px;
-
-    font-size: 14px;
-    font-weight: 600;
+    background: #f8dada;
+    color: #a12626;
 }
 
 /* FOOTER */
-
 footer {
-    margin-top: 45px;
-    padding-top: 25px;
-
-    border-top: 1px solid var(--border);
-
     text-align: center;
-    color: var(--muted);
-
-    font-size: 12px;
-    letter-spacing: 1px;
+    margin-top: 45px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 13px;
+    color: #777;
 }
 
-/* ANIMASI */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* RESPONSIVE TABLET */
-
-@media (max-width: 768px) {
-
-    .rekap {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    h1 {
-        font-size: 27px;
-    }
-}
-
-/* RESPONSIVE HP */
-
-@media (max-width: 480px) {
+/* RESPONSIVE UNTUK HP */
+@media (max-width: 600px) {
 
     body {
         padding: 12px;
     }
 
     .container {
-        padding: 0 15px 25px;
-        border-radius: 12px;
+        padding: 20px 12px;
     }
 
     h1 {
-        margin: 0 -15px;
-        padding: 35px 12px 15px;
-        font-size: 23px;
+        font-size: 22px;
+        letter-spacing: 1px;
     }
 
     .subtitle {
-        margin: 0 -15px 25px;
-        font-size: 11px;
-        letter-spacing: 1.5px;
+        font-size: 14px;
     }
 
-    th {
-        font-size: 11px;
-        padding: 14px 7px;
-    }
-
-    td {
-        font-size: 12px;
-        padding: 12px 7px;
+    th, td {
+        padding: 10px 5px;
+        font-size: 13px;
     }
 
     select {
-        width: 115px;
-        padding: 9px 5px;
+        width: 110px;
         font-size: 12px;
+        padding: 8px 4px;
+    }
+
+    .rekap {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .rekap h3 {
+        font-size: 26px;
     }
 
     button {
         width: 100%;
-        margin: 25px 0 35px;
     }
-
-    .rekap {
-        gap: 10px;
-    }
-
-    .rekap div {
-        padding: 18px 13px;
-    }
-
-    .rekap h3 {
-        font-size: 29px;
-    }
-
-    h2 {
-        font-size: 22px;
-    }
-   }
-   
+}
