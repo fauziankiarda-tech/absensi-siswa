@@ -1,0 +1,38 @@
+
+name: Absensi Siswa PHP
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  jalankan-php:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mengambil file project
+        uses: actions/checkout@v4
+
+      - name: Menyiapkan PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Memeriksa kode PHP
+        run: php -l index.php
+
+      - name: Menjalankan program PHP
+        run: |
+          mkdir -p hasil
+          php index.php > hasil/index.html
+          cp style.css hasil/style.css
+
+      - name: Menyimpan hasil program
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-absensi
+          path: hasil/
+          
