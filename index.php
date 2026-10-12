@@ -1,8 +1,9 @@
 
 <?php
 session_start();
+date_default_timezone_set("Asia/Jakarta");
 
-// Daftar nama siswa
+// Daftar siswa
 $siswa = [
     1 => "Sabri",
     2 => "Aisyah",
@@ -16,13 +17,16 @@ $siswa = [
     10 => "Galih chyo"
 ];
 
-// Menyimpan absensi
+// Pilihan absensi
+$pilihan = ["Hadir", "Izin", "Sakit", "Alfa"];
+
+// Proses menyimpan absensi
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $pilihan = ["Hadir", "Izin", "Sakit", "Alfa"];
     $absensi = [];
 
     foreach ($siswa as $no => $nama) {
+
         $status = $_POST["status"][$no] ?? "";
 
         if (in_array($status, $pilihan, true)) {
@@ -39,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 
-// Mengambil data absensi
+// Mengambil data
 $data = $_SESSION["absensi"] ?? [];
 
 // Menghitung rekap
@@ -49,139 +53,142 @@ $sakit = 0;
 $alfa = 0;
 
 foreach ($data as $status) {
-    if ($status == "Hadir") {
-        $hadir++;
-    } elseif ($status == "Izin") {
-        $izin++;
-    } elseif ($status == "Sakit") {
-        $sakit++;
-    } elseif ($status == "Alfa") {
-        $alfa++;
+
+    switch ($status) {
+        case "Hadir":
+            $hadir++;
+            break;
+
+        case "Izin":
+            $izin++;
+            break;
+
+        case "Sakit":
+            $sakit++;
+            break;
+
+        case "Alfa":
+            $alfa++;
+            break;
     }
 }
+
+// Membuat tampilan website
+echo "<!DOCTYPE html>";
+echo "<html lang='id'>";
+
+echo "<head>";
+echo "<meta charset='UTF-8'>";
+echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+echo "<title>Absensi Siswa</title>";
+echo "<link rel='stylesheet' href='style.css'>";
+echo "</head>";
+
+echo "<body>";
+
+echo "<div class='container'>";
+
+echo "<h1>DAFTAR ABSENSI SISWA</h1>";
+echo "<p class='subtitle'>Sistem Absensi Kelas X RPL 2</p>";
+
+echo "<p>Tanggal: " . date("d-m-Y") . "</p>";
+
+// Pesan berhasil
+if (isset($_GET["success"])) {
+    echo "<div class='success'>";
+    echo "Absensi berhasil disimpan!";
+    echo "</div>";
+}
+
+// Form absensi
+echo "<form method='POST'>";
+
+echo "<div class='table-wrapper'>";
+echo "<table>";
+
+echo "<tr>";
+echo "<th>No</th>";
+echo "<th>Nama Siswa</th>";
+echo "<th>Keterangan</th>";
+echo "</tr>";
+
+// Menampilkan daftar siswa
+foreach ($siswa as $no => $nama) {
+
+    echo "<tr>";
+
+    echo "<td>$no</td>";
+
+    echo "<td>" . htmlspecialchars($nama) . "</td>";
+
+    echo "<td>";
+
+    echo "<select name='status[$no]' required>";
+
+    echo "<option value=''>Pilih Status</option>";
+
+    foreach ($pilihan as $status) {
+
+        $selected = "";
+
+        if (($data[$no] ?? "") == $status) {
+            $selected = "selected";
+        }
+
+        echo "<option value='$status' $selected>";
+        echo $status;
+        echo "</option>";
+    }
+
+    echo "</select>";
+
+    echo "</td>";
+    echo "</tr>";
+}
+
+echo "</table>";
+echo "</div>";
+
+echo "<button type='submit'>";
+echo "Simpan Absensi";
+echo "</button>";
+
+echo "</form>";
+
+// Rekap absensi
+echo "<h2>Rekap Absensi</h2>";
+
+echo "<div class='rekap'>";
+
+echo "<div class='hadir'>";
+echo "<h3>$hadir</h3>";
+echo "<p>Hadir</p>";
+echo "</div>";
+
+echo "<div class='izin'>";
+echo "<h3>$izin</h3>";
+echo "<p>Izin</p>";
+echo "</div>";
+
+echo "<div class='sakit'>";
+echo "<h3>$sakit</h3>";
+echo "<p>Sakit</p>";
+echo "</div>";
+
+echo "<div class='alfa'>";
+echo "<h3>$alfa</h3>";
+echo "<p>Alfa</p>";
+echo "</div>";
+
+echo "</div>";
+
+// Footer
+echo "<footer>";
+echo "Website Absensi Siswa | X RPL 2";
+echo "</footer>";
+
+echo "</div>";
+
+echo "</body>";
+echo "</html>";
 ?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Absensi Siswa</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="container">
-
-    <h1>DAFTAR ABSENSI SISWA</h1>
-    <p class="subtitle">Sistem Absensi Kelas X RPL</p>
-
-    <p>
-        Tanggal:
-        <?php echo date("d-m-Y"); ?>
-    </p>
-
-    <?php if (isset($_GET["success"])): ?>
-        <div class="success">
-            Absensi berhasil disimpan!
-        </div>
-    <?php endif; ?>
-
-    <form method="POST">
-
-        <div class="table-wrapper">
-        <table>
-            <tr>
-                <th>No</th>
-                <th>Nama Siswa</th>
-                <th>Keterangan</th>
-            </tr>
-
-            <?php foreach ($siswa as $no => $nama): ?>
-
-            <tr>
-                <td><?php echo $no; ?></td>
-
-                <td>
-                    <?php echo htmlspecialchars($nama); ?>
-                </td>
-
-                <td>
-                    <select name="status[<?php echo $no; ?>]"
-                            required>
-
-                        <option value="">Pilih Status</option>
-
-                        <?php
-                        $pilihan = [
-                            "Hadir",
-                            "Izin",
-                            "Sakit",
-                            "Alfa"
-                        ];
-
-                        foreach ($pilihan as $status):
-                        ?>
-
-                        <option value="<?php echo $status; ?>"
-                            <?php
-                            if (($data[$no] ?? "") == $status) {
-                                echo "selected";
-                            }
-                            ?>
-                        >
-                            <?php echo $status; ?>
-                        </option>
-
-                        <?php endforeach; ?>
-
-                    </select>
-                </td>
-            </tr>
-
-            <?php endforeach; ?>
-
-        </table>
-        </div>
-
-        <button type="submit">
-            Simpan Absensi
-        </button>
-
-    </form>
-
-    <h2>Rekap Absensi</h2>
-
-    <div class="rekap">
-        <div class="hadir">
-            <h3><?php echo $hadir; ?></h3>
-            <p>Hadir</p>
-        </div>
-
-        <div class="izin">
-            <h3><?php echo $izin; ?></h3>
-            <p>Izin</p>
-        </div>
-
-        <div class="sakit">
-            <h3><?php echo $sakit; ?></h3>
-            <p>Sakit</p>
-        </div>
-
-        <div class="alfa">
-            <h3><?php echo $alfa; ?></h3>
-            <p>Alfa</p>
-        </div>
-    </div>
-
-    <footer>
-        Website Absensi Siswa | X RPL 2
-    </footer>
-
-</div>
-
-</body>
-</html>
